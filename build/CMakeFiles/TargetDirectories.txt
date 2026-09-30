@@ -1,0 +1,3 @@
+C:/Users/manea/Downloads/PACKETSIMULATOR/build/CMakeFiles/PacketRoutingSimulator.dir
+C:/Users/manea/Downloads/PACKETSIMULATOR/build/CMakeFiles/edit_cache.dir
+C:/Users/manea/Downloads/PACKETSIMULATOR/build/CMakeFiles/rebuild_cache.dir

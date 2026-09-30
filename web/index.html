@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packet Routing Simulator</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="titles">
+                <h1>Packet Routing Simulator</h1>
+                <p>Dijkstra & Distance Vector C++ Engine</p>
+            </div>
+            <div class="status-badge" id="serverStatus">
+                ● Checking backend...
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <aside class="left-panel card">
+            <h3>Topology Actions</h3>
+            <div class="actions">
+                <button id="btnLoadDemo" class="secondary">Load Demo Grid</button>
+                <button id="btnClear" class="danger">Clear All</button>
+                <button id="btnAddNode" class="secondary" style="margin-top:5px;">+ Add Node</button>
+                <button id="btnAddEdge" class="secondary" style="margin-top:5px;">+ Add Edge</button>
+            </div>
+            <div class="instructions">
+                <p><strong>Left Click:</strong> Drag nodes to reposition.</p>
+                <p><strong>Click Edge:</strong> Toggle Fail/Active state.</p>
+            </div>
+        </aside>
+
+        <section class="canvas-container card">
+            <svg id="visualization" width="100%" height="600"></svg>
+        </section>
+
+        <aside class="right-panel card">
+            <h3>Simulation Controls</h3>
+            <div class="control-group">
+                <label>Algorithm</label>
+                <select id="algorithm">
+                    <option value="dijkstra">Dijkstra (Link-State)</option>
+                    <option value="distance_vector">Distance Vector</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>Source Node</label>
+                <select id="sourceNode"></select>
+            </div>
+            
+            <div class="control-group">
+                <label>Destination Node</label>
+                <select id="destNode"></select>
+            </div>
+
+            <div class="control-group toggles">
+                <label><input type="checkbox" id="chkCongestion"> Congestion Aware</label>
+                <label><input type="checkbox" id="chkSplitHorizon"> Split Horizon (DV)</label>
+            </div>
+
+            <div class="actions">
+                <button id="btnSimulate" class="primary">Run Simulation</button>
+                <button id="btnCompare" class="secondary">Compare Algorithms</button>
+            </div>
+        </aside>
+    </main>
+
+    <section class="bottom-panel card">
+        <div class="stats-grid">
+            <div class="stat-box">
+                <span class="stat-label">Status</span>
+                <span class="stat-value" id="resStatus">-</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Total Cost</span>
+                <span class="stat-value" id="resCost">-</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Total Hops</span>
+                <span class="stat-value" id="resHops">-</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Compute Time</span>
+                <span class="stat-value" id="resTime">-</span>
+            </div>
+        </div>
+        
+        <div class="trace-terminal">
+            <div class="terminal-header">Trace Log</div>
+            <div id="logContent"></div>
+        </div>
+    </section>
+
+    <div id="toast-container"></div>
+
+    <script src="js/api.js"></script>
+    <script src="js/graph-ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
