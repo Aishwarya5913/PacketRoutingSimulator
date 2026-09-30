@@ -1,69 +1,80 @@
-# Packet Routing Simulator - Complete Project Details
+# Comprehensive Project Report: Packet Routing Simulator
 
-## 1. What is this Project and Why do we Need it? (Project Need)
-**The Problem:** 
-In the real world, when you send a message on WhatsApp or load a YouTube video, your data is chopped into tiny pieces called "packets". These packets travel across the world through physical wires and routers. However, the internet is unpredictable—wires get cut, routers get overloaded with traffic (congestion), and paths fail. How do routers instantly know the fastest backup route to send your data?
+## 1. Abstract
+The **Packet Routing Simulator** is an interactive, web-based software application designed to visualize and benchmark how data packets travel across a network of routers. It provides a real-time, drag-and-drop environment where users can build custom network topologies, simulate physical link failures, and observe how different routing algorithms (Dijkstra's Link-State and Bellman-Ford's Distance Vector) adapt to these changes dynamically. 
 
-**The Need (Why we built this):**
-Routing algorithms are invisible and hard to understand. We need this project to **visually demonstrate** how networks survive failures. This tool allows students, educators, and network engineers to see exactly how data finds its way through a maze of routers using complex mathematics, making the invisible world of networking visible and interactive.
+## 2. Project Need and Objectives
+### The Problem
+In modern computer networks, routing algorithms operate silently in the background. When a user requests a web page, the data packets traverse multiple routers, often recalculating paths on the fly due to broken cables or heavy traffic (congestion). For students and engineers, understanding these abstract mathematical processes is difficult without a visual aid.
 
----
-
-## 2. Innovative Features
-This project isn't just a static calculator; it has several innovative and interactive features:
-1. **Interactive Drag-and-Drop Canvas:** You can physically drag routers around the screen to design your own custom network geography.
-2. **Real-time Link Failure Simulation:** By simply clicking on a connecting line (edge), you can "cut" the wire. The system will instantly recalculate a backup route, simulating a real-world disaster.
-3. **Congestion Awareness:** Networks aren't always empty. By turning on "Congestion Aware", the simulator adds random invisible traffic jams to the wires, forcing the packet to take a longer, less obvious route to save time.
-4. **Algorithm Benchmarking:** The "Compare Algorithms" feature forces the backend engine to race Dijkstra and Distance Vector against each other 1,000 times to see which one computes faster down to the millisecond.
-5. **Live Packet Animation:** You literally watch a visual packet travel node-by-node from the source to the destination, accompanied by a trace log of its journey.
+### The Objective
+This project was built to:
+1. **Visualize the Invisible:** Turn abstract routing mathematics into a tangible, visual animation where packets can be seen moving node-by-node.
+2. **Provide Interactive Learning:** Allow users to actively break connections and see how the network "heals" itself.
+3. **Compare Performance:** Provide an empirical benchmark tool to measure the computational latency of different routing algorithms on the exact same dataset.
 
 ---
 
-## 3. Core Algorithms (In Simple English)
-The project relies on two famous network algorithms to find the shortest path:
+## 3. Innovative Features in Detail
+This simulator goes beyond static shortest-path calculators by implementing dynamic, real-world network phenomena:
 
-*   **Dijkstra's Algorithm (Link-State):**
-    *   **Example:** Imagine you have a complete GPS map of a city in your car. You can see every single road and traffic jam globally.
-    *   **How it works:** Every router is given a full map of the entire network. Because it knows everything, it can instantly calculate the absolute shortest path to the destination. It is very fast but uses a lot of computer memory.
-*   **Distance Vector Algorithm (Bellman-Ford):**
-    *   **Example:** Imagine you are lost in a city without a map. You stand at an intersection and ask a police officer, "How far to the hospital?" They say, "I don't know the exact roads, but the next guy is 5 minutes away, and he told me he is 10 minutes from the hospital."
-    *   **How it works:** Routers do not know the full map. They only know their direct neighbors. They constantly whisper their distances to their neighbors until everyone slowly figures out the best way to go. It requires very little memory but takes longer to react to broken wires.
-
----
-
-## 4. Object-Oriented Programming (OOP) Concepts Used
-This project uses Object-Oriented Programming (OOP) extensively, particularly in the C++ backend (and the JavaScript UI). OOP is a way of writing code where we map real-world objects into computer code.
-
-Here is how the 4 pillars of OOP are used in this project:
-
-### A. Classes and Objects
-*   **Concept:** A `Class` is a blueprint. An `Object` is the actual thing built from the blueprint.
-*   **Example in Project:** 
-    *   We have a blueprint called `class Router`. It dictates that every router must have an ID, an X/Y coordinate, and a list of neighbors.
-    *   When you click "+ Add Node", the code creates a brand new **Object** from that blueprint (e.g., `Router 5`).
-
-### B. Encapsulation
-*   **Concept:** Hiding the internal data and only letting the outside world interact with it through safe, controlled methods. (Like a capsule hiding the medicine inside).
-*   **Example in Project:**
-    *   In the C++ backend, a router's "Routing Table" (its list of distances) is marked as `private`. 
-    *   Another router cannot just hack in and change Router 1's table. It must use a public method like `updateRoutingTable()`. This keeps the network secure and prevents buggy code from ruining the data.
-
-### C. Inheritance
-*   **Concept:** Creating a "Parent" category, and letting "Child" categories inherit its traits so we don't have to rewrite code.
-*   **Example in Project:**
-    *   We have a generic parent class called `class RoutingAlgorithm`. It contains basic properties like "Start Time" and "End Time".
-    *   We then create two child classes: `class Dijkstra` and `class DistanceVector`. Both of these inherit from `RoutingAlgorithm`. We don't have to rewrite the time-tracking code because the children inherited it automatically from the parent!
-
-### D. Polymorphism
-*   **Concept:** Meaning "many forms." It allows a single instruction to do different things depending on who is receiving it.
-*   **Example in Project:**
-    *   Both our `Dijkstra` class and `DistanceVector` class have a function named `calculatePath()`.
-    *   In the main server, the code simply says `algorithm.calculatePath()`. 
-    *   Because of Polymorphism, the computer knows exactly which version of the calculation to run based on what the user selected in the UI dropdown. The single command takes "many forms".
+*   **Custom Topology Builder:** Users are not restricted to a fixed map. Through the interactive SVG canvas, users can add custom routers (nodes) and define custom cables (edges) with specific latency weights.
+*   **Real-time Fault Tolerance Testing:** Users can click on any network cable to instantly "cut" it. The simulator instantly recalculates the backup route, demonstrating network resilience.
+*   **Congestion Awareness Engine:** By enabling this feature, the backend temporarily inflates the "weight" (latency) of random cables to simulate sudden heavy traffic. The algorithm must intelligently route the packet around this invisible traffic jam.
+*   **Split Horizon Loop Prevention:** Specifically for the Distance Vector algorithm, this feature enables "Route Poisoning" logic to prevent the famous *Count-to-Infinity* problem, where disconnected routers loop packets back and forth forever.
+*   **Microsecond Benchmarking:** A dedicated comparison engine forces the backend to calculate the shortest path 1,000 times in a loop, recording the execution time down to the millisecond to prove which algorithm is computationally heavier.
 
 ---
 
-## 5. Technology Stack Summary
-*   **Frontend User Interface:** HTML, CSS, JavaScript (SVG for Graphics).
-*   **Backend Server:** Node.js (and C++ httplib).
-*   **Data Exchange:** JSON (JavaScript Object Notation) is used to pass the network graph from the frontend to the backend engine for calculation.
+## 4. Core Algorithms Explained
+The core of the simulator relies on two fundamental networking algorithms. 
+
+### A. Dijkstra's Algorithm (Link-State Protocol)
+*   **Concept:** Every router is provided with a complete, global map of the entire network. Using this map, the router calculates the absolute shortest path to the destination in one go.
+*   **Real-World Analogy:** Having a bird's-eye view from a helicopter or using a complete GPS map to find the best route.
+*   **Implementation:** The backend uses a **Priority Queue (Min-Heap)**. It always explores the closest known router first, locking in the shortest distance, and then explores its neighbors. 
+*   **Pros & Cons:** Extremely fast to converge and 100% loop-free. However, sharing the entire map with every router requires massive memory and bandwidth (e.g., OSPF protocol).
+
+### B. Distance Vector Algorithm (Bellman-Ford)
+*   **Concept:** Routers do *not* have a map of the network. They only know their immediate physical neighbors. They discover routes by constantly asking their neighbors, "How far are you from the destination?" and adding their own distance to the neighbor's answer.
+*   **Real-World Analogy:** Navigating a maze by reading signposts at each intersection, without ever seeing a map of the maze.
+*   **Implementation:** The backend "relaxes" all active edges mathematically $|V| - 1$ times (where V is the number of routers). 
+*   **Pros & Cons:** Requires very little memory and bandwidth (e.g., RIP protocol). However, it adapts very slowly to broken links (slow convergence).
+
+---
+
+## 5. Object-Oriented Programming (OOP) Concepts Used
+The software architecture heavily relies on the four pillars of Object-Oriented Programming to maintain clean, modular, and scalable code.
+
+### 1. Classes and Objects
+*   **Definition:** A Class is a blueprint that defines properties and behaviors. An Object is an actual instance created from that blueprint.
+*   **Project Example:** In the frontend (`graph-ui.js`), there is a `class GraphUI`. It defines the blueprint for how a network grid should behave. When the app starts, we create an Object: `const ui = new GraphUI("visualization");`. Similarly, every Router on the screen is treated as a unique object containing its own specific `id`, `x`, and `y` coordinates.
+
+### 2. Encapsulation
+*   **Definition:** The bundling of data (variables) and methods (functions) into a single unit, hiding the internal state from outside interference.
+*   **Project Example:** Inside the `GraphUI` class, the arrays holding the raw SVG elements (`this.nodes` and `this.edges`) are encapsulated. The main application (`app.js`) cannot randomly change an SVG circle's radius directly. Instead, `app.js` must call controlled public methods like `ui.drawGraph()` or `ui.animatePacket()`. This protects the visual state from being corrupted by rogue data.
+
+### 3. Inheritance
+*   **Definition:** A mechanism where a new class inherits properties and behaviors from an existing parent class, promoting code reusability.
+*   **Project Example:** In the backend C++ architecture (`algorithms/`), there is a parent class called `RoutingAlgorithm`. It holds common logic like `startTimer()`, `stopTimer()`, and `logTrace()`. The specific algorithms (`class Dijkstra` and `class DistanceVector`) **inherit** from `RoutingAlgorithm`. The developer did not have to rewrite the timer logic in both files, saving time and preventing bugs.
+
+### 4. Polymorphism
+*   **Definition:** The ability of different objects to respond to the exact same method call in their own unique way.
+*   **Project Example:** Both the `Dijkstra` and `DistanceVector` modules have a function named `calculateShortestPath(source, target)`. When the API receives a request, the server simply calls `algorithm.calculateShortestPath()`. The server doesn't need to write completely different if/else blocks to handle the math—thanks to polymorphism, the selected algorithm object intrinsically knows how to execute its specific version of that method.
+
+---
+
+## 6. System Architecture & Tech Stack
+*   **Frontend UI:** HTML5, CSS3, and Vanilla JavaScript.
+*   **Graphics Rendering:** SVG (Scalable Vector Graphics) manipulated via the DOM for crisp, lightweight, and hardware-accelerated animations.
+*   **Backend Server:** Node.js (`http` module).
+*   **Data Exchange:** The frontend packages the nodes, edges, algorithm choice, and custom options into a **JSON payload**. It sends this via a POST request to `/api/simulate`. The backend computes the shortest path mathematically and returns a JSON response containing the `totalCost`, `hops`, `computeTimeMs`, and an array of steps (`trace`) for the frontend to animate.
+
+---
+
+## 7. How to Setup and Run
+1. Ensure **Node.js** is installed on your computer.
+2. Open the `PACKETSIMULATOR` folder in VS Code or any terminal.
+3. Run the command: `node server.js`
+4. Open a web browser and navigate to `http://localhost:8080`.
+5. **To use:** Add nodes and edges using the left panel, select your source and destination, choose an algorithm, and click **Run Simulation** to watch the packet travel.
