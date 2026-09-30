@@ -1,0 +1,28 @@
+# CMake build files
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+compile_commands.json
+
+# Compiled files
+*.exe
+*.obj
+*.o
+*.a
+*.lib
+*.dll
+
+# VS Code
+.vscode/
+
+# Node.js
+node_modules/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
