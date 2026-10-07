@@ -2,6 +2,7 @@
 #include <queue>
 #include <limits>
 
+
 std::unordered_map<std::string, std::unordered_map<std::string, std::string>> 
 DijkstraRouter::computeRoutes(Graph& graph) {
     std::unordered_map<std::string, std::unordered_map<std::string, std::string>> allRoutes;
