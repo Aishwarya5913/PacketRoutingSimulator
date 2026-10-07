@@ -1,6 +1,9 @@
 #include "Server.h"
 #include "Simulator.h"
+#include "../third_party/json.hpp"
 #include <iostream>
+
+using json = nlohmann::json;
 
 SimulationServer::SimulationServer(int port) : port(port) {
     setupRoutes();

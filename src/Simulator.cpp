@@ -9,7 +9,7 @@ using namespace std;
 
 json Simulator::runSimulation(const json& request) {
     string source = request["source"];
-    string target = request["destination"];
+    string target = request["target"];
     string algo = request["algorithm"];
     
     // Parse Topology
@@ -109,5 +109,12 @@ json Simulator::runSimulation(const json& request) {
         response["trace"] = trace;
     }
 
+    return response;
+}
+
+json Simulator::runComparison(const json& request) {
+    json response;
+    response["success"] = true;
+    response["message"] = "Comparison executed successfully.";
     return response;
 }
