@@ -12,7 +12,6 @@ json Simulator::runSimulation(const json& request) {
     string target = request["target"];
     string algo = request["algorithm"];
     
-    // Parse Topology
     unordered_map<string, vector<pair<string, int>>> adj;
     for (auto& edge : request["edges"]) {
         if (edge["active"] == true) {
@@ -86,7 +85,6 @@ json Simulator::runSimulation(const json& request) {
         for (int i = path.size() - 1; i > 0; --i) {
             string u = path[i];
             string v = path[i-1];
-            // Find edge id
             string edgeId = "";
             for (auto& edge : request["edges"]) {
                 if ((edge["source"] == u && edge["target"] == v) || (edge["source"] == v && edge["target"] == u)) {
