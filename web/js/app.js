@@ -168,7 +168,15 @@ async function runSimulation() {
         document.getElementById("resStatus").textContent = "Success";
         document.getElementById("resCost").textContent = res.totalCost;
         document.getElementById("resHops").textContent = res.hops;
-        document.getElementById("resTime").textContent = res.computationTimeMs + " ms";
+        const timeMs = Number(res.computationTimeMs);
+        if (isNaN(timeMs)) {
+            document.getElementById("resTime").textContent = "-";
+        } else if (timeMs < 1) {
+            const timeUs = Math.round(timeMs * 1000);
+            document.getElementById("resTime").textContent = `${timeMs.toFixed(3)} ms (${timeUs} µs)`;
+        } else {
+            document.getElementById("resTime").textContent = `${timeMs.toFixed(2)} ms`;
+        }
         
         ui.animatePacket(res.trace);
         

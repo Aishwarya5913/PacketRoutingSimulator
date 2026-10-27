@@ -57,7 +57,7 @@ json Simulator::runSimulation(const json& request) {
     }
 
     auto end_time = chrono::high_resolution_clock::now();
-    int compute_time = chrono::duration_cast<chrono::milliseconds>(end_time - start_time).count();
+    double compute_time = chrono::duration<double, milli>(end_time - start_time).count();
 
     json response;
     response["success"] = true;
